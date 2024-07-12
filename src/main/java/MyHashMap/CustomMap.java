@@ -68,9 +68,6 @@ public class CustomMap<K, V> implements Map<K, V> {
      * @param loadFactor  коэффициент загрузки.
      */
     public CustomMap(int arrayLength, float loadFactor) {
-        if (arrayLength <= 0 || loadFactor <= 0) {
-            throw new IllegalArgumentException("The parameters must be positive.");
-        }
         this.arrayLength = arrayLength;
         this.loadFactor = loadFactor;
         this.table = new Node[arrayLength];
@@ -101,7 +98,7 @@ public class CustomMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean containsKey(Object key) {
-        return keySet().stream().anyMatch(presentKey -> presentKey.equals(key));
+        return keySet().stream().anyMatch(HaveKey -> HaveKey.equals(key));
     }
     /**
      * Метод проверяет имеется ли значение в мапе.
@@ -111,7 +108,7 @@ public class CustomMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean containsValue(Object value) {
-        return values().stream().anyMatch(presentValue -> presentValue.equals(value));
+        return values().stream().anyMatch(HaveValue -> HaveValue.equals(value));
     }
     /**
      * Метод возвращает значение по ключу
