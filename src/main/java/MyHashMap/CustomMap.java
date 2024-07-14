@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
  * @param <K> тип ключей.
  * @param <V> тип значений.
  */
-public class CustomMap<K, V> implements Map<K, V> {
+
+public class CustomMap<K,V> extends AbstractMap<K,V> implements Map<K,V> {
     /**
      * Коэффициент загрузки, используемый по умолчанию.
      */
@@ -17,7 +18,7 @@ public class CustomMap<K, V> implements Map<K, V> {
     /**
      *  Емкость хеш-таблицы по умолчанию.
      */
-    private static final int DEFAULT_LENGTH = 16;
+    private static final int DEFAULT_INITIAL_CAPACITY = 16;
     /**
      * Коэффициент расширения массива
      */
@@ -27,7 +28,7 @@ public class CustomMap<K, V> implements Map<K, V> {
      */
     private int arrayLength;
     /**
-     * Размер массива
+     * Количество элементов в массиве
      */
     private int size;
     /**
@@ -44,7 +45,7 @@ public class CustomMap<K, V> implements Map<K, V> {
      * Конструктор с параметрами по умолчанию
      */
     public CustomMap() {
-        this(DEFAULT_LENGTH, DEFAULT_LOAD_FACTOR);
+        this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
     }
     /**
      * Конструктор с заданной длиной массива arrayLenght
@@ -59,7 +60,7 @@ public class CustomMap<K, V> implements Map<K, V> {
      * @param loadFactor коэффициент загрузки мапы
      */
     public CustomMap(float loadFactor) {
-        this(DEFAULT_LENGTH, loadFactor);
+        this(DEFAULT_INITIAL_CAPACITY, loadFactor);
     }
     /**
      * Конструктор инициализируется произвольной длиной массива и коэффициентом загрузки.
@@ -67,7 +68,8 @@ public class CustomMap<K, V> implements Map<K, V> {
      * @param arrayLength длинна массива.
      * @param loadFactor  коэффициент загрузки.
      */
-    public CustomMap(int arrayLength, float loadFactor) {
+    public CustomMap(int arrayLength, float loadFactor)
+    {
         this.arrayLength = arrayLength;
         this.loadFactor = loadFactor;
         this.table = new Node[arrayLength];
@@ -234,7 +236,7 @@ public class CustomMap<K, V> implements Map<K, V> {
      */
     @Override
     public void clear() {
-        table = new Node[DEFAULT_LENGTH];
+        table = new Node[DEFAULT_INITIAL_CAPACITY];
         size = 0;
     }
     /**
